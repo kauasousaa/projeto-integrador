@@ -14,7 +14,9 @@ projeto-integrador/
 └── docs/      Documentação técnica (arquitetura, decisões, fontes)
 ```
 
-O jogo é organizado pelos **5 períodos históricos** do edital (cada período é uma "fase"). Cada fase contém **marcos históricos** (mundo e Brasil) e **desafios** (quiz, linha do tempo, "ache o bug"). Toda ação do jogador é registrada como **interação** para Analytics.
+O jogo, **"Jornada do Código: a evolução do software"**, é organizado pelos **5 períodos históricos** do edital (cada período é uma "era" do jogo, liberada de forma linear). Cada era contém **marcos históricos** (mundo e Brasil) e **desafios**. Toda ação do jogador é registrada como **interação** para Analytics.
+
+> **Versão 1:** apenas desafios do tipo **Quiz**. A hierarquia `Desafio` (abstrata) já nasce preparada para novos tipos (Linha do Tempo, Ache o Bug, Associação) sem alterar o código existente (princípio aberto/fechado).
 
 ---
 
