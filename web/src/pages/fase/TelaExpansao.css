@@ -1,0 +1,108 @@
+.tela-fase.tema-expansao .gabinete {
+  box-sizing: border-box;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 92px 24px 88px;
+}
+
+.tela-fase.tema-expansao .tela-crt {
+  position: relative;
+  width: min(860px, 100%);
+  height: min(520px, 100%);
+  background: #d9d4cc;
+  border: 8px solid #efe6d6;
+  box-shadow: inset 0 0 0 8px #8d8378, 8px 8px 0 #5c4a32;
+}
+
+.tela-fase.tema-expansao .tela-crt .barra {
+  height: 28px;
+  padding: 8px 12px;
+  background: #2a2118;
+  color: #efe6d6;
+  font-size: 10px;
+}
+
+.tela-fase.tema-expansao .tela-crt .tarefa {
+  margin: 0;
+  padding: 12px;
+  color: #2a2118;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.tela-fase.tema-expansao .tela-crt .mesa {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 78px;
+  bottom: 16px;
+}
+
+.tela-fase.tema-expansao .tela-crt .icone {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: 116px;
+  margin: 0;
+  padding: 8px;
+  border: 4px solid #2a2118;
+  background: #efe6d6;
+  color: #2a2118;
+  box-shadow: 4px 4px 0 #8d8378;
+  font: inherit;
+  font-size: 10px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.tela-fase.tema-expansao .tela-crt .icone small {
+  font-size: 8px;
+}
+
+.tela-fase.tema-expansao .tela-crt .icone.aberto,
+.tela-fase.tema-expansao .tela-crt .icone:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.tela-fase.tema-expansao .tela-crt .selo-icone {
+  width: 28px;
+  height: 22px;
+  border: 3px solid #2a2118;
+}
+
+.tela-fase.tema-expansao .tela-crt .janela {
+  position: absolute;
+  right: 28px;
+  bottom: 24px;
+  width: min(320px, calc(100% - 40px));
+  background: #efe6d6;
+  border: 4px solid #2a2118;
+  box-shadow: 6px 6px 0 #5c4a32;
+  color: #2a2118;
+}
+
+.tela-fase.tema-expansao .tela-crt .janela header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  background: #2a2118;
+  color: #efe6d6;
+  font-size: 10px;
+}
+
+.tela-fase.tema-expansao .tela-crt .janela p {
+  margin: 0;
+  padding: 10px;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.tela-fase.tema-expansao .tela-crt .janela button {
+  margin: 0 10px 10px;
+  padding: 10px 12px;
+  font-size: 10px;
+}

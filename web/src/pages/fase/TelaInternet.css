@@ -1,0 +1,46 @@
+.mapa {
+  position: relative;
+  height: 100%;
+}
+
+.mapa svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mapa line {
+  stroke: #7eb6ff;
+  stroke-width: 0.6;
+}
+
+.mapa .no {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-width: 92px;
+  padding: 10px 8px;
+  border: 4px solid #7eb6ff;
+  background: #10243f;
+  color: #d6e8ff;
+  font-size: 10px;
+  text-align: center;
+}
+
+.mapa .no.destino {
+  border-color: #7dffb3;
+  color: #7dffb3;
+}
+
+.mapa .no.aqui {
+  background: #7eb6ff;
+  color: #061018;
+}
+
+.mapa .pacote {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -120%);
+  pointer-events: none;
+  image-rendering: pixelated;
+}

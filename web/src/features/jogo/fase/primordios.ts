@@ -33,22 +33,22 @@ const PLACAS: Placa[] = [
   {
     x: 36,
     y: 56,
-    linhas: ['1804', 'Cartões perfurados', 'mandam na máquina.'],
+    linhas: ['1804', 'O tear lê cartões', 'no lugar da mão.'],
   },
   {
     x: 600,
     y: 56,
-    linhas: ['1843', 'Ada escreve o', 'primeiro programa.'],
+    linhas: ['1843', 'Ada publica o', 'primeiro programa.'],
   },
   {
     x: 1300,
     y: 56,
-    linhas: ['1936', 'Turing imagina uma', 'máquina universal.'],
+    linhas: ['1936', 'Turing: uma máquina', 'para todo programa.'],
   },
   {
     x: 1520,
     y: 44,
-    linhas: ['1945', 'Cabos no ENIAC.', 'O programa entra', 'na memória.'],
+    linhas: ['1945', 'O programa entra', 'na memória.'],
   },
 ]
 
@@ -215,8 +215,6 @@ export function desenharVisitante(
   y: number,
   esquerda: boolean,
 ) {
-  ctx.fillStyle = 'rgba(12, 8, 20, 0.4)'
-  ctx.fillRect(x + 4, y + ALTURA_SPRITE - 4, 24, 4)
   ctx.save()
   ctx.imageSmoothingEnabled = false
   if (esquerda) {

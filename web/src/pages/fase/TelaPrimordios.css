@@ -117,3 +117,267 @@
   color: #2a160c;
   border-color: #2a160c;
 }
+
+.tela-fase .miolo {
+  height: 100%;
+}
+
+.tela-fase .dica {
+  position: absolute;
+  z-index: 1;
+  left: 12px;
+  bottom: 78px;
+  max-width: min(640px, calc(100% - 24px));
+  margin: 0;
+  padding: 10px 12px;
+  background: #2a160c;
+  color: #f3e2b3;
+  border: 4px solid #e6c36a;
+  font-size: 10px;
+  line-height: 1.6;
+  pointer-events: none;
+}
+
+.tela-fase .dica strong {
+  color: #e6c36a;
+}
+
+.tela-fase .escolha {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100% - 32px));
+  padding: 14px;
+  background: #2a160c;
+  color: #f3e2b3;
+  border: 4px solid #e6c36a;
+  box-shadow: 6px 6px 0 #120c22;
+}
+
+.tela-fase .escolha p {
+  margin: 0 0 10px;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.tela-fase .escolha .opcoes {
+  display: grid;
+  gap: 8px;
+}
+
+.tela-fase.tema-laboratorio .escolha {
+  background: #0e241c;
+  color: #d7f5e3;
+  border-color: #7dffb3;
+  box-shadow: 6px 6px 0 #07140f;
+}
+
+.tela-fase.tema-expansao .escolha,
+.tela-fase.tema-expansao .tela-crt .janela button {
+  background: #5c4a32;
+  color: #efe6d6;
+  border-color: #efe6d6;
+}
+
+.tela-fase.tema-rede .escolha {
+  background: #10243f;
+  color: #d6e8ff;
+  border-color: #7eb6ff;
+  box-shadow: 6px 6px 0 #061018;
+}
+
+.tela-fase.tema-futuro .escolha {
+  background: #120818;
+  color: #e8fff6;
+  border-color: #c77dff;
+  box-shadow: 6px 6px 0 #07060f;
+}
+
+.tela-fase.tema-laboratorio {
+  background: #07140f;
+  color: #d7f5e3;
+}
+
+.tela-fase.tema-laboratorio .miolo,
+.tela-fase.tema-laboratorio .palco {
+  background: #07140f;
+}
+
+.tela-fase.tema-laboratorio .identidade {
+  background: #d7f5e3;
+  border-color: #0e241c;
+  box-shadow: 4px 4px 0 #0e241c;
+}
+
+.tela-fase.tema-laboratorio .selo,
+.tela-fase.tema-laboratorio h1 {
+  color: #0e241c;
+}
+
+.tela-fase.tema-laboratorio button {
+  border-color: #7dffb3;
+  background: #0e241c;
+  color: #d7f5e3;
+  box-shadow: 4px 4px 0 #07140f;
+}
+
+.tela-fase.tema-laboratorio .controles,
+.tela-fase.tema-laboratorio .dica,
+.tela-fase.tema-laboratorio .fim {
+  background: #0e241c;
+  color: #d7f5e3;
+  border: 4px solid #7dffb3;
+}
+
+.tela-fase.tema-laboratorio .fim h2,
+.tela-fase.tema-laboratorio .dica strong {
+  color: #7dffb3;
+}
+
+.tela-fase.tema-laboratorio .fim button {
+  background: #7dffb3;
+  color: #0e241c;
+  border-color: #0e241c;
+}
+
+.tela-fase.tema-expansao {
+  background: #b7a48c;
+  color: #2a2118;
+}
+
+.tela-fase.tema-expansao .miolo {
+  background: #b7a48c;
+}
+
+.tela-fase.tema-expansao .identidade {
+  background: #efe6d6;
+  border-color: #5c4a32;
+  box-shadow: 4px 4px 0 #5c4a32;
+}
+
+.tela-fase.tema-expansao .selo,
+.tela-fase.tema-expansao h1 {
+  color: #2a2118;
+}
+
+.tela-fase.tema-expansao button {
+  border-color: #efe6d6;
+  background: #5c4a32;
+  color: #efe6d6;
+  box-shadow: 4px 4px 0 #2a2118;
+}
+
+.tela-fase.tema-expansao .controles,
+.tela-fase.tema-expansao .fim {
+  background: #5c4a32;
+  color: #efe6d6;
+  border-color: #efe6d6;
+}
+
+.tela-fase.tema-expansao .fim h2 {
+  color: #ffb000;
+}
+
+.tela-fase.tema-expansao .fim button {
+  background: #efe6d6;
+  color: #2a2118;
+  border-color: #2a2118;
+}
+
+.tela-fase.tema-rede {
+  background: #061018;
+  color: #d6e8ff;
+}
+
+.tela-fase.tema-rede .miolo {
+  background: #061018;
+}
+
+.tela-fase.tema-rede .identidade {
+  background: #10243f;
+  border-color: #7eb6ff;
+  box-shadow: 4px 4px 0 #7eb6ff;
+}
+
+.tela-fase.tema-rede .selo,
+.tela-fase.tema-rede h1 {
+  color: #d6e8ff;
+}
+
+.tela-fase.tema-rede button {
+  border-color: #7eb6ff;
+  background: #10243f;
+  color: #d6e8ff;
+  box-shadow: 4px 4px 0 #061018;
+}
+
+.tela-fase.tema-rede .controles,
+.tela-fase.tema-rede .dica,
+.tela-fase.tema-rede .fim {
+  background: #10243f;
+  color: #d6e8ff;
+  border: 4px solid #7eb6ff;
+}
+
+.tela-fase.tema-rede .fim h2,
+.tela-fase.tema-rede .dica strong {
+  color: #7eb6ff;
+}
+
+.tela-fase.tema-rede .fim button {
+  background: #7eb6ff;
+  color: #061018;
+  border-color: #061018;
+}
+
+.tela-fase.tema-futuro {
+  background: #07060f;
+  color: #e8fff6;
+}
+
+.tela-fase.tema-futuro .miolo {
+  background:
+    linear-gradient(rgba(125, 255, 179, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(199, 125, 255, 0.08) 1px, transparent 1px),
+    #07060f;
+  background-size: 28px 28px, 28px 28px, auto;
+}
+
+.tela-fase.tema-futuro .identidade {
+  background: #120818;
+  border-color: #c77dff;
+  box-shadow: 4px 4px 0 #7dffb3;
+}
+
+.tela-fase.tema-futuro .selo,
+.tela-fase.tema-futuro h1 {
+  color: #e8fff6;
+}
+
+.tela-fase.tema-futuro button {
+  border-color: #7dffb3;
+  background: #120818;
+  color: #e8fff6;
+  box-shadow: 4px 4px 0 #c77dff;
+}
+
+.tela-fase.tema-futuro .controles,
+.tela-fase.tema-futuro .dica,
+.tela-fase.tema-futuro .fim {
+  background: #120818;
+  color: #e8fff6;
+  border: 4px solid #c77dff;
+}
+
+.tela-fase.tema-futuro .fim h2,
+.tela-fase.tema-futuro .dica strong {
+  color: #7dffb3;
+}
+
+.tela-fase.tema-futuro .fim button {
+  background: #7dffb3;
+  color: #120818;
+  border-color: #120818;
+}

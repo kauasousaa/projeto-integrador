@@ -6,8 +6,6 @@ export const CHAO = 124
 
 export const INICIO = { x: 96, y: 128 }
 
-const ALTURA_SPRITE = 48
-
 const LARGURA_QUADRO = 156
 const PASSO_QUADRO = 240
 const ORIGEM_QUADRO = 200
@@ -41,13 +39,13 @@ const OBSTACULOS: Retangulo[] = [
   { x: 0, y: 192, largura: MUNDO_LARGURA, altura: MUNDO_ALTURA - 192 },
   { x: 0, y: 0, largura: 16, altura: MUNDO_ALTURA },
   { x: MUNDO_LARGURA - 16, y: 0, largura: 16, altura: MUNDO_ALTURA },
-  { x: 300, y: 170, largura: 72, altura: 18 },
-  { x: 860, y: 170, largura: 72, altura: 18 },
+  { x: 300, y: 182, largura: 72, altura: 10 },
+  { x: 860, y: 182, largura: 72, altura: 10 },
   ...ALAS.map((ala) => ({
     x: ala.x + LARGURA_QUADRO / 2 - 16,
     y: CHAO + 16,
     largura: 32,
-    altura: 16,
+    altura: 8,
   })),
   ...COLUNAS.map((x) => ({ x, y: 16, largura: 16, altura: CHAO - 8 })),
 ]
@@ -220,9 +218,9 @@ function desenharQuadro(ctx: CanvasRenderingContext2D, ala: AlaNoMundo, ativa: b
   ctx.fillText(ala.nome, ala.x + LARGURA_QUADRO / 2, y + 73)
   const centro = ala.x + LARGURA_QUADRO / 2
   ctx.fillStyle = '#140e18'
-  ctx.fillRect(centro - 16, CHAO + 16, 32, 16)
+  ctx.fillRect(centro - 16, CHAO + 16, 32, 8)
   ctx.fillStyle = MOLDURAS[era]
-  ctx.fillRect(centro - 12, CHAO + 18, 24, 6)
+  ctx.fillRect(centro - 12, CHAO + 18, 24, 4)
 }
 
 function desenharBanco(ctx: CanvasRenderingContext2D, x: number, y: number) {
@@ -258,8 +256,8 @@ export function desenharMundo(ctx: CanvasRenderingContext2D, alaAtiva: CodigoFas
     desenharQuadro(ctx, ala, ala.id === alaAtiva)
     desenharLustre(ctx, ala.x + LARGURA_QUADRO / 2)
   }
-  desenharBanco(ctx, 300, 166)
-  desenharBanco(ctx, 860, 166)
+  desenharBanco(ctx, 300, 178)
+  desenharBanco(ctx, 860, 178)
 }
 
 export function desenharVisitante(
@@ -269,8 +267,6 @@ export function desenharVisitante(
   y: number,
   esquerda: boolean,
 ) {
-  ctx.fillStyle = 'rgba(12, 8, 20, 0.4)'
-  ctx.fillRect(x + 4, y + ALTURA_SPRITE - 4, 24, 4)
   ctx.save()
   ctx.imageSmoothingEnabled = false
   if (esquerda) {

@@ -25,6 +25,74 @@ function escurecer(hex: string, fator: number) {
   return `#${codigo.toString(16).padStart(6, '0')}`
 }
 
+const PASSO_A = garantir('passo-a', [
+  '..o.accccccaao..',
+  '..oa.cccccccao..',
+  '..oaccccccccao..',
+  '..aaccccccca.a..',
+  '....pp..pp......',
+  '..pp.pp..pp.....',
+  '..pP.pP..pp.....',
+  '..bb.bb..pP.....',
+  '......bb.bbo....',
+  '................',
+  '................',
+  '................',
+  '................',
+], 16)
+
+const PASSAGEM = garantir('passagem', [
+  '..oaaccccccaao..',
+  '..oaccccccccao..',
+  '..oaccccccccao..',
+  '..aaccccccccaa..',
+  '....pp....pp....',
+  '....pp....pp....',
+  '...pp......pp...',
+  '...pP......Pp...',
+  '..obb......bbo..',
+  '................',
+  '................',
+  '................',
+  '................',
+], 16)
+
+const PULO = garantir('pulo', [
+  '..aa.cccccc.aa..',
+  '..o..cccccc..o..',
+  '..oaccccccccao..',
+  '..oaccccccccao..',
+  '....pp....pp....',
+  '...pP......Pp...',
+  '..obb......bbo..',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+], 16)
+
+const QUEDA = garantir('queda', [
+  '..o.acccccca.o..',
+  '..oa.cccccc.ao..',
+  '..oaccccccccao..',
+  '..aaccccccccaa..',
+  '.....pp..pp.....',
+  '....pp....pp....',
+  '...pp......pp...',
+  '..pP........Pp..',
+  '..bb........bb..',
+  '................',
+  '................',
+  '................',
+  '................',
+], 16)
+
+function espelhar(linhas: string[]) {
+  return linhas.map((linha) => [...linha].reverse().join(''))
+}
+
 const CORPO = garantir('corpo', [
   '................',
   '................',
@@ -299,7 +367,44 @@ function pintar(linhas: string[], grade: (string | null)[][], cores: Record<stri
   })
 }
 
-export function montarPersonagem(aparencia: Aparencia) {
+export type Pose = 'parado' | 'passagem' | 'passo-a' | 'passo-b' | 'pulo' | 'queda' | 'pouso'
+
+const MIUDOS: Record<Exclude<Pose, 'parado'>, string[]> = {
+  passagem: PASSAGEM,
+  'passo-a': PASSO_A,
+  'passo-b': espelhar(PASSO_A),
+  pulo: PULO,
+  queda: QUEDA,
+  pouso: PASSAGEM,
+}
+
+export function animacaoDoPersonagem(estado: {
+  andando: boolean
+  noChao: boolean
+  subindo: boolean
+  ciclo: number
+  pouso: number
+}) {
+  if (!estado.noChao) {
+    return { pose: estado.subindo ? 'pulo' : 'queda', elevacao: estado.subindo ? -1 : 0 } as const
+  }
+  if (estado.pouso > 0) {
+    return { pose: 'pouso', elevacao: 1 } as const
+  }
+  if (!estado.andando) {
+    return { pose: 'parado', elevacao: 0 } as const
+  }
+  const quadro = Math.floor(estado.ciclo) % 4
+  if (quadro === 1) {
+    return { pose: 'passo-a', elevacao: -2 } as const
+  }
+  if (quadro === 3) {
+    return { pose: 'passo-b', elevacao: -2 } as const
+  }
+  return { pose: 'passagem', elevacao: 0 } as const
+}
+
+export function montarPersonagem(aparencia: Aparencia, pose: Pose = 'parado') {
   const pele = corDe(TOM_PELE, aparencia.tomPele)
   const cabelo = corDe(CORES_CABELO, aparencia.corCabelo)
   const camisa = corDe(CORES_CAMISA, aparencia.camisa)
@@ -320,10 +425,38 @@ export function montarPersonagem(aparencia: Aparencia) {
     h: cabelo,
     H: escurecer(cabelo, 0.68),
   }
-  const grade: (string | null)[][] = CORPO.map(() => Array<string | null>(16).fill(null))
-  pintar(CORPO, grade, cores)
+  const linhas = pose === 'parado' ? CORPO : [...CORPO.slice(0, 11), ...MIUDOS[pose]]
+  const grade: (string | null)[][] = linhas.map(() => Array<string | null>(16).fill(null))
+  pintar(linhas, grade, cores)
   pintar(CABELOS[aparencia.cabelo], grade, cores)
   return grade
+}
+
+const POSES: Pose[] = ['parado', 'passagem', 'passo-a', 'passo-b', 'pulo', 'queda', 'pouso']
+
+export function telasDoPersonagem(aparencia: Aparencia) {
+  const telas = {} as Record<Pose, HTMLCanvasElement>
+  for (const pose of POSES) {
+    const tela = document.createElement('canvas')
+    tela.width = 16
+    tela.height = 24
+    const pincel = tela.getContext('2d')
+    if (!pincel) {
+      continue
+    }
+    pincel.imageSmoothingEnabled = false
+    montarPersonagem(aparencia, pose).forEach((linha, y) => {
+      linha.forEach((cor, x) => {
+        if (!cor) {
+          return
+        }
+        pincel.fillStyle = cor
+        pincel.fillRect(x, y, 1, 1)
+      })
+    })
+    telas[pose] = tela
+  }
+  return telas
 }
 
 const PORTAL_PIXELS = garantir('portal', [

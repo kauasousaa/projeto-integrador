@@ -2,6 +2,18 @@ import { useEffect, useState } from 'react'
 import { TelaLogin } from './pages/login/TelaLogin'
 import { TelaLobby } from './pages/lobby/TelaLobby'
 import { TelaPersonagem } from './pages/personagem/TelaPersonagem'
+import {
+  PROVA_EXPANSAO,
+  PROVA_FUNDACAO,
+  PROVA_INTERNET,
+  PROVA_NUVEM,
+  PROVA_PRIMORDIOS,
+  type Prova,
+} from './features/jogo/fase/provas'
+import { TelaExpansao } from './pages/fase/TelaExpansao'
+import { TelaFundacao } from './pages/fase/TelaFundacao'
+import { TelaInternet } from './pages/fase/TelaInternet'
+import { TelaNuvem } from './pages/fase/TelaNuvem'
 import { TelaPrimordios } from './pages/fase/TelaPrimordios'
 import { TelaTiro } from './pages/tiro/TelaTiro'
 import { buscarAparencia } from './services/api/aparencia'
@@ -9,13 +21,27 @@ import { CHAVE_SESSAO } from './constants/sessao'
 import type { Aparencia } from './types/aparencia'
 import type { SessaoCriada } from './types/sessao'
 
-type Etapa = 'carregando' | 'personagem' | 'lobby' | 'primordios' | 'tiro'
+type Etapa =
+  | 'carregando'
+  | 'personagem'
+  | 'lobby'
+  | 'primordios'
+  | 'fundacao'
+  | 'expansao'
+  | 'internet'
+  | 'nuvem'
+  | 'tiro'
+
+function visitaEmAndamento(etapa: Etapa) {
+  return etapa !== 'carregando' && etapa !== 'personagem'
+}
 
 export default function App() {
   const [sessaoPronta, setSessaoPronta] = useState(false)
   const [sessao, setSessao] = useState<SessaoCriada | null>(null)
   const [etapa, setEtapa] = useState<Etapa>('carregando')
   const [aparencia, setAparencia] = useState<Aparencia | null>(null)
+  const [prova, setProva] = useState<Prova>(PROVA_PRIMORDIOS)
 
   useEffect(() => {
     const salva = localStorage.getItem(CHAVE_SESSAO)
@@ -42,13 +68,7 @@ export default function App() {
           return
         }
         setAparencia((atual) => (atual?.salva ? atual : salva))
-        setEtapa((atual) =>
-          atual === 'lobby' || atual === 'primordios' || atual === 'tiro'
-            ? atual
-            : salva.salva
-              ? 'lobby'
-              : 'personagem',
-        )
+        setEtapa((atual) => (visitaEmAndamento(atual) ? atual : salva.salva ? 'lobby' : 'personagem'))
       })
       .catch(() => {
         if (ativo) {
@@ -82,7 +102,57 @@ export default function App() {
   }
 
   if (etapa === 'tiro' && aparencia) {
-    return <TelaTiro aparencia={aparencia} onVoltar={() => setEtapa('lobby')} />
+    return <TelaTiro aparencia={aparencia} prova={prova} onVoltar={() => setEtapa('lobby')} />
+  }
+
+  if (etapa === 'nuvem' && aparencia) {
+    return (
+      <TelaNuvem
+        onVoltar={() => setEtapa('lobby')}
+        onConcluir={() => {
+          setProva(PROVA_NUVEM)
+          setEtapa('tiro')
+        }}
+      />
+    )
+  }
+
+  if (etapa === 'internet' && aparencia) {
+    return (
+      <TelaInternet
+        aparencia={aparencia}
+        onVoltar={() => setEtapa('lobby')}
+        onConcluir={() => {
+          setProva(PROVA_INTERNET)
+          setEtapa('tiro')
+        }}
+      />
+    )
+  }
+
+  if (etapa === 'expansao' && aparencia) {
+    return (
+      <TelaExpansao
+        onVoltar={() => setEtapa('lobby')}
+        onConcluir={() => {
+          setProva(PROVA_EXPANSAO)
+          setEtapa('tiro')
+        }}
+      />
+    )
+  }
+
+  if (etapa === 'fundacao' && aparencia) {
+    return (
+      <TelaFundacao
+        aparencia={aparencia}
+        onVoltar={() => setEtapa('lobby')}
+        onConcluir={() => {
+          setProva(PROVA_FUNDACAO)
+          setEtapa('tiro')
+        }}
+      />
+    )
   }
 
   if (etapa === 'primordios' && aparencia) {
@@ -90,7 +160,10 @@ export default function App() {
       <TelaPrimordios
         aparencia={aparencia}
         onVoltar={() => setEtapa('lobby')}
-        onConcluir={() => setEtapa('tiro')}
+        onConcluir={() => {
+          setProva(PROVA_PRIMORDIOS)
+          setEtapa('tiro')
+        }}
       />
     )
   }
@@ -102,7 +175,16 @@ export default function App() {
         aparencia={aparencia}
         onAjustarVisual={() => setEtapa('personagem')}
         onTrocarNome={trocarNome}
-        onEntrarPrimordios={() => setEtapa('primordios')}
+        onEntrarFase={(fase) => {
+          const destino = {
+            PRIMORDIOS: 'primordios',
+            FUNDACAO: 'fundacao',
+            EXPANSAO: 'expansao',
+            INTERNET: 'internet',
+            ERA_DIGITAL: 'nuvem',
+          } as const
+          setEtapa(destino[fase])
+        }}
       />
     )
   }

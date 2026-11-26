@@ -6,6 +6,7 @@ export type FaseLobby = {
   nome: string
   quando: string
   tema: string
+  como: string
   clima: 'passado' | 'laboratorio' | 'expansao' | 'rede' | 'futuro'
   icone: (string | null)[][]
 }
@@ -116,6 +117,7 @@ export const FASES_LOBBY: FaseLobby[] = [
     nome: 'Primórdios',
     quando: 'até 1945',
     tema: 'O começo: contas, cartões e a ideia de um programa.',
+    como: 'A corrida conta como o programa nasceu.',
     clima: 'passado',
     icone: primordios,
   },
@@ -124,7 +126,8 @@ export const FASES_LOBBY: FaseLobby[] = [
     numero: 2,
     nome: 'Fundação',
     quando: '1945–1969',
-    tema: 'Nascem os primeiros softwares e os grandes computadores.',
+    tema: 'Compiladores, linguagens e o software que sai do laboratório.',
+    como: 'O laboratório conta a linguagem e a engenharia.',
     clima: 'laboratorio',
     icone: fundacao,
   },
@@ -134,6 +137,7 @@ export const FASES_LOBBY: FaseLobby[] = [
     nome: 'Expansão',
     quando: '1970–1989',
     tema: 'O código sai dos laboratórios e chega às casas.',
+    como: 'O micro conta o software virando produto.',
     clima: 'expansao',
     icone: expansao,
   },
@@ -143,6 +147,7 @@ export const FASES_LOBBY: FaseLobby[] = [
     nome: 'Internet',
     quando: '1990–2009',
     tema: 'A rede liga o mundo e muda a vida do software.',
+    como: 'A rede conta a web, o código livre e o ágil.',
     clima: 'rede',
     icone: internet,
   },
@@ -152,6 +157,7 @@ export const FASES_LOBBY: FaseLobby[] = [
     nome: 'Era digital',
     quando: '2010–hoje',
     tema: 'Nuvem, dados e o que o código ainda vai inventar.',
+    como: 'A nuvem conta o software de agora.',
     clima: 'futuro',
     icone: futuro,
   },

@@ -1,23 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
+import type { Alvo, Prova } from '../../features/jogo/fase/provas'
 import { CORES_CAMISA, TOM_PELE, corDe, type Aparencia } from '../../types/aparencia'
 import './TelaTiro.css'
 
 type Propriedades = {
   aparencia: Aparencia
+  prova: Prova
   onVoltar: () => void
 }
-
-type Alvo = {
-  id: string
-  nome: string
-  certo: boolean
-}
-
-const ALVOS: Alvo[] = [
-  { id: 'ada', nome: 'Ada Lovelace', certo: true },
-  { id: 'turing', nome: 'Alan Turing', certo: false },
-  { id: 'hopper', nome: 'Grace Hopper', certo: false },
-]
 
 function embaralhar(lista: Alvo[]) {
   const copia = [...lista]
@@ -72,8 +62,8 @@ function Arma({ pele, camisa, disparo }: { pele: string; camisa: string; disparo
   return <canvas ref={tela} className="arma" width={52} height={44} aria-hidden="true" />
 }
 
-export function TelaTiro({ aparencia, onVoltar }: Propriedades) {
-  const [alvos] = useState(() => embaralhar(ALVOS))
+export function TelaTiro({ aparencia, prova, onVoltar }: Propriedades) {
+  const [alvos] = useState(() => embaralhar(prova.alvos))
   const [escolha, setEscolha] = useState<string | null>(null)
   const [disparo, setDisparo] = useState(false)
   const pele = corDe(TOM_PELE, aparencia.tomPele)
@@ -92,7 +82,7 @@ export function TelaTiro({ aparencia, onVoltar }: Propriedades) {
   return (
     <main className="tela-tiro">
       <p className="pergunta">
-        Quem escreveu o primeiro programa de computador?
+        {prova.pergunta}
         <span>Atire no alvo da resposta.</span>
       </p>
       <div className="parede">
@@ -122,9 +112,7 @@ export function TelaTiro({ aparencia, onVoltar }: Propriedades) {
         <article className={alvo.certo ? 'resultado acerto' : 'resultado erro'} aria-live="polite">
           <h1>{alvo.certo ? 'Acertou' : 'Errou'}</h1>
           <p>
-            {alvo.certo
-              ? 'Ada Lovelace escreveu o primeiro programa publicado, em 1843, para a Máquina Analítica.'
-              : 'Quem escreveu o primeiro programa foi Ada Lovelace, em 1843. Turing e Hopper vêm depois nessa história.'}
+            {alvo.certo ? prova.acerto : prova.erro}
           </p>
           <button type="button" onClick={onVoltar}>
             Voltar ao museu

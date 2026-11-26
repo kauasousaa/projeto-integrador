@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { montarPersonagem } from '../../features/jogo/pixel/sprites'
+import { animacaoDoPersonagem, telasDoPersonagem } from '../../features/jogo/pixel/sprites'
 import { FASES_LOBBY, type CodigoFase } from '../../features/jogo/lobby/fases'
 import {
   MUNDO_ALTURA,
@@ -19,7 +19,7 @@ type Propriedades = {
   aparencia: Aparencia
   onAjustarVisual: () => void
   onTrocarNome: () => void
-  onEntrarPrimordios: () => void
+  onEntrarFase: (fase: CodigoFase) => void
 }
 
 const VELOCIDADE = 100
@@ -42,12 +42,12 @@ export function TelaLobby({
   aparencia,
   onAjustarVisual,
   onTrocarNome,
-  onEntrarPrimordios,
+  onEntrarFase,
 }: Propriedades) {
   const palco = useRef<HTMLDivElement>(null)
   const tela = useRef<HTMLCanvasElement>(null)
-  const entrarPrimordios = useRef(onEntrarPrimordios)
-  entrarPrimordios.current = onEntrarPrimordios
+  const entrarFase = useRef(onEntrarFase)
+  entrarFase.current = onEntrarFase
   const [alaId, setAlaId] = useState<CodigoFase | null>(null)
   const [mostrarDica, setMostrarDica] = useState(true)
   const ala = FASES_LOBBY.find((fase) => fase.id === alaId) ?? null
@@ -68,23 +68,7 @@ export function TelaLobby({
       return
     }
 
-    const sprite = document.createElement('canvas')
-    sprite.width = 16
-    sprite.height = 24
-    const pincel = sprite.getContext('2d')
-    if (!pincel) {
-      return
-    }
-    pincel.imageSmoothingEnabled = false
-    montarPersonagem(aparencia).forEach((linha, y) => {
-      linha.forEach((cor, x) => {
-        if (!cor) {
-          return
-        }
-        pincel.fillStyle = cor
-        pincel.fillRect(x, y, 1, 1)
-      })
-    })
+    const sprites = telasDoPersonagem(aparencia)
 
     const teclas = new Set<string>()
     let x = INICIO.x
@@ -108,9 +92,12 @@ export function TelaLobby({
 
     const aoPressionar = (evento: KeyboardEvent) => {
       const tecla = evento.key.toLowerCase()
-      if (tecla === 'e' && alaPerto(x, y) === 'PRIMORDIOS') {
-        evento.preventDefault()
-        entrarPrimordios.current()
+      if (tecla === 'e') {
+        const alaAtual = alaPerto(x, y)
+        if (alaAtual) {
+          evento.preventDefault()
+          entrarFase.current(alaAtual)
+        }
         return
       }
       if (!teclaDeAndar(tecla)) {
@@ -165,9 +152,15 @@ export function TelaLobby({
         if (dx > 0) {
           esquerda = false
         }
-        passo += dt * 9
+        passo += dt * 10
       }
-      const balanco = andando && Math.floor(passo) % 2 === 0 ? -1 : 0
+      const animacao = animacaoDoPersonagem({
+        andando,
+        noChao: true,
+        subindo: false,
+        ciclo: passo,
+        pouso: 0,
+      })
       const camera = enquadrar(x, canvas.width)
       ctx.imageSmoothingEnabled = false
       ctx.fillStyle = '#120c22'
@@ -176,7 +169,7 @@ export function TelaLobby({
       ctx.translate(-camera, 0)
       const atual = alaPerto(x, y)
       desenharMundo(ctx, atual)
-      desenharVisitante(ctx, sprite, x, y + balanco, esquerda)
+      desenharVisitante(ctx, sprites[animacao.pose], x, y + animacao.elevacao, esquerda)
       ctx.restore()
       if (atual !== perto) {
         perto = atual
@@ -222,18 +215,14 @@ export function TelaLobby({
               <p className="numero">fase 0{ala.numero} · {ala.quando}</p>
               <h2>{ala.nome}</h2>
               <p>{ala.tema}</p>
-              <p className="aviso">
-                {ala.id === 'PRIMORDIOS'
-                  ? 'Pressione E para entrar nesta época.'
-                  : 'A visita a esta época abre na próxima etapa. A fase ainda não está montada.'}
-              </p>
+              <p className="aviso">Pressione E para entrar. {ala.como}</p>
             </>
           ) : (
             <p>Ande pelo corredor. O começo fica na entrada. Quanto mais você avança, mais o museu olha para o futuro.</p>
           )}
         </article>
       )}
-      <p className="controles">W A S D e as setas para andar. Aproxime-se de um quadro para ler a época.</p>
+      <p className="controles">W A S D e as setas para andar. Aproxime-se de um quadro e pressione E para entrar.</p>
     </main>
   )
 }
