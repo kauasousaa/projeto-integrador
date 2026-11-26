@@ -1,0 +1,147 @@
+.tela-personagem {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px 40px;
+  position: relative;
+  background: #1b1464;
+  color: #f4f1de;
+  font-family: 'Press Start 2P', ui-monospace, monospace;
+}
+
+.tela-personagem .ceu {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 18%, #f8f4d8 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 16%, #f8f4d8 0 2px, transparent 3px),
+    linear-gradient(#241a7a, #1b1464 55%, #14204a);
+  pointer-events: none;
+}
+
+.tela-personagem .painel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 640px);
+  padding: 24px 18px 20px;
+  background: #241448;
+  border: 4px solid #f4f1de;
+  box-shadow: 8px 8px 0 #0b0820;
+}
+
+.tela-personagem .fase {
+  margin: 0 0 14px;
+  color: #7dffb3;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.tela-personagem h1 {
+  margin: 0;
+  font-size: clamp(15px, 3.4vw, 20px);
+  line-height: 1.6;
+  color: #ffe14a;
+}
+
+.tela-personagem .subtitulo,
+.tela-personagem .dica,
+.tela-personagem .ok {
+  color: #d7d3ea;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.palco {
+  margin-top: 18px;
+  padding: 12px 8px 8px;
+  background: #f3e2b3;
+  border: 4px solid #1a1028;
+}
+
+.seletor {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  gap: 8px;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.seletor p {
+  margin: 0;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.seletor button,
+.acoes button {
+  padding: 12px 10px;
+  border: 4px solid #08210f;
+  background: #3dff7a;
+  color: #08210f;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #08210f;
+}
+
+.paleta {
+  margin: 14px 0 0;
+  padding: 8px 0 0;
+  border: 0;
+}
+
+.paleta legend {
+  padding: 0;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.amostras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.amostra {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 4px solid #f4f1de;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.amostra.ativa {
+  outline: 4px solid #ffe14a;
+  outline-offset: 2px;
+}
+
+.erro {
+  margin: 14px 0 0;
+  color: #ffd0d0;
+  background: #8d1d3d;
+  border: 4px solid #ff8fa3;
+  padding: 12px;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.ok {
+  margin: 14px 0 0;
+  color: #08210f;
+  background: #7dffb3;
+  padding: 12px;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.acoes .secundario {
+  background: #f4f1de;
+}

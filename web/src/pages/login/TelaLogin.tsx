@@ -1,33 +1,16 @@
-import { useEffect, useState, type FormEvent } from 'react'
-import { CHAVE_SESSAO } from '../../constants/sessao'
+import { useState, type FormEvent } from 'react'
 import { criarSessao } from '../../services/api/sessao'
 import type { SessaoCriada } from '../../types/sessao'
 import './TelaLogin.css'
 
-export function TelaLogin() {
+type Propriedades = {
+  onEntrar: (sessao: SessaoCriada) => void
+}
+
+export function TelaLogin({ onEntrar }: Propriedades) {
   const [nome, setNome] = useState('')
-  const [sessao, setSessao] = useState<SessaoCriada | null>(null)
   const [mensagem, setMensagem] = useState<string | null>(null)
   const [carregando, setCarregando] = useState(false)
-
-  useEffect(() => {
-    const salva = localStorage.getItem(CHAVE_SESSAO)
-    if (!salva) {
-      return
-    }
-    try {
-      setSessao(JSON.parse(salva) as SessaoCriada)
-    } catch {
-      localStorage.removeItem(CHAVE_SESSAO)
-    }
-  }, [])
-
-  function sair() {
-    localStorage.removeItem(CHAVE_SESSAO)
-    setSessao(null)
-    setNome('')
-    setMensagem(null)
-  }
 
   async function entrar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault()
@@ -41,8 +24,7 @@ export function TelaLogin() {
     setMensagem(null)
     try {
       const criada = await criarSessao(apelido)
-      localStorage.setItem(CHAVE_SESSAO, JSON.stringify(criada))
-      setSessao(criada)
+      onEntrar(criada)
     } catch (erro) {
       setMensagem(erro instanceof Error ? erro.message : 'Não foi possível criar o nome de usuário.')
     } finally {
@@ -58,18 +40,7 @@ export function TelaLogin() {
         <h1>Museu do Software</h1>
         <p className="subtitulo">Uma jornada 8-bit pela evolução do código.</p>
 
-        {sessao ? (
-          <div className="boas-vindas">
-            <p>
-              Nome registrado, <strong>{sessao.apelido}</strong>.
-            </p>
-            <p>A primeira fase abre quando a jornada começar.</p>
-            <button type="button" onClick={sair}>
-              Trocar nome
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={entrar} noValidate>
+        <form onSubmit={entrar} noValidate>
             <label htmlFor="nome-usuario">Nome de usuário</label>
             <input
               id="nome-usuario"
@@ -99,7 +70,6 @@ export function TelaLogin() {
               {carregando ? 'Entrando...' : 'Entrar'}
             </button>
           </form>
-        )}
       </section>
 
       <div className="chao" aria-hidden="true">

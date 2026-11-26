@@ -37,7 +37,7 @@ public class Interacao extends EntidadeBase {
 	private Instant ocorridoEm;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_evento", nullable = false, length = 30, updatable = false)
+	@Column(name = "tipo_evento", nullable = false, length = 30, updatable = false, columnDefinition = "varchar(30)")
 	private TipoEvento tipoEvento;
 
 	@Enumerated(EnumType.STRING)
@@ -99,6 +99,10 @@ public class Interacao extends EntidadeBase {
 
 	public static Interacao sessaoIniciada(Sessao sessao) {
 		return new Interacao(sessao, TipoEvento.SESSAO_INICIADA, "inicio", null);
+	}
+
+	public static Interacao personagemSalvo(Sessao sessao) {
+		return new Interacao(sessao, TipoEvento.PERSONAGEM_SALVO, "personagem", null);
 	}
 
 	public static Interacao periodoAcessado(Sessao sessao, Periodo periodo, String tela) {

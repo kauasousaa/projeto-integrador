@@ -1,0 +1,161 @@
+.sprite {
+  position: relative;
+  width: 148px;
+  height: 220px;
+  margin: 0 auto;
+}
+
+.coque,
+.cabelo,
+.mechas,
+.cabeca,
+.franja,
+.tronco,
+.braco,
+.perna,
+.sapato {
+  position: absolute;
+  border: 4px solid #1a1028;
+  box-sizing: border-box;
+}
+
+.coque {
+  display: none;
+  left: 54px;
+  top: 0;
+  width: 40px;
+  height: 32px;
+  background: var(--cabelo);
+  border-radius: 16px 16px 8px 8px;
+}
+
+.cabelo {
+  left: 38px;
+  top: 22px;
+  width: 72px;
+  height: 28px;
+  background: var(--cabelo);
+}
+
+.mechas {
+  display: none;
+  left: 28px;
+  top: 42px;
+  width: 92px;
+  height: 70px;
+  background: linear-gradient(90deg, var(--cabelo) 0 18px, transparent 18px 74px, var(--cabelo) 74px);
+  border: 0;
+}
+
+.cabeca {
+  left: 42px;
+  top: 42px;
+  width: 64px;
+  height: 56px;
+  background: var(--pele);
+}
+
+.franja {
+  display: none;
+  left: -4px;
+  top: -4px;
+  width: 64px;
+  height: 18px;
+  background: var(--cabelo);
+}
+
+.olho {
+  position: absolute;
+  top: 22px;
+  width: 10px;
+  height: 10px;
+  background: var(--olhos);
+  border: 2px solid #1a1028;
+}
+
+.olho.esq {
+  left: 12px;
+}
+
+.olho.dir {
+  right: 12px;
+}
+
+.boca {
+  position: absolute;
+  left: 24px;
+  bottom: 10px;
+  width: 12px;
+  height: 4px;
+  background: #7a3040;
+}
+
+.tronco {
+  left: 36px;
+  top: 102px;
+  width: 76px;
+  height: 52px;
+  background: var(--camisa);
+}
+
+.braco {
+  top: 106px;
+  width: 18px;
+  height: 40px;
+  background: var(--pele);
+}
+
+.braco.esq {
+  left: 18px;
+}
+
+.braco.dir {
+  right: 18px;
+}
+
+.perna {
+  top: 154px;
+  width: 26px;
+  height: 40px;
+  background: var(--calca);
+}
+
+.perna.esq {
+  left: 42px;
+}
+
+.perna.dir {
+  right: 42px;
+}
+
+.sapato {
+  top: 190px;
+  width: 30px;
+  height: 14px;
+  background: #2b2118;
+}
+
+.sapato.esq {
+  left: 38px;
+}
+
+.sapato.dir {
+  right: 38px;
+}
+
+.sprite.cabelo-franja .franja,
+.sprite.cabelo-coque .coque {
+  display: block;
+}
+
+.sprite.cabelo-longo .mechas {
+  display: block;
+}
+
+.sprite.cabelo-longo .cabelo {
+  height: 36px;
+}
+
+.sprite.cabelo-careca .cabelo {
+  display: none;
+}

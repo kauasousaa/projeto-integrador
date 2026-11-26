@@ -7,10 +7,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.senai.fatesg.museusoftware.jogador.exception.NomeEmUsoException;
+import br.senai.fatesg.museusoftware.jogador.exception.SessaoNaoEncontradaException;
 import br.senai.fatesg.museusoftware.shared.dto.ApiErro;
 
 @RestControllerAdvice
 public class TratadorDeErros {
+
+	@ExceptionHandler(SessaoNaoEncontradaException.class)
+	public ResponseEntity<ApiErro> sessaoNaoEncontrada(SessaoNaoEncontradaException excecao) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiErro(404, excecao.getMessage()));
+	}
 
 	@ExceptionHandler(NomeEmUsoException.class)
 	public ResponseEntity<ApiErro> nomeEmUso(NomeEmUsoException excecao) {

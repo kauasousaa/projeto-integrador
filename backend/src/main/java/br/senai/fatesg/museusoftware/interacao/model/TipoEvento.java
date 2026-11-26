@@ -2,6 +2,7 @@ package br.senai.fatesg.museusoftware.interacao.model;
 
 public enum TipoEvento {
 	SESSAO_INICIADA,
+	PERSONAGEM_SALVO,
 	PERIODO_ACESSADO,
 	EIXO_ACESSADO,
 	CONTEUDO_ABERTO,
