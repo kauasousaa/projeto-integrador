@@ -61,8 +61,8 @@ backend/src/test/java/...   Espelha os módulos — testes unitários dos servic
 
 | Conceito | Aplicação planejada |
 |---|---|
-| Abstração / herança | `shared/model`: entidade base abstrata herdada pelas demais. `desafio/model`: `Desafio` abstrato com subtipos `DesafioQuiz`, `DesafioLinhaDoTempo`, `DesafioCodigo` (herança JPA). |
-| Polimorfismo | Cada tipo de desafio implementa sua própria forma de **corrigir a resposta** e **calcular a pontuação**; o service chama o mesmo método sem saber o tipo concreto. |
+| Abstração / herança | `EntidadeBase` é herdada pelas entidades. `Desafio` é abstrato (herança JPA `JOINED`); o primeiro subtipo é `DesafioPortal`, ligado ao portal da fase. |
+| Polimorfismo | `Desafio.avaliar(resposta)` devolve um `ResultadoAvaliacao`. Cada subtipo corrige do seu jeito; quem chama não conhece a classe concreta. |
 | Encapsulamento | Atributos privados; mudanças de estado por métodos com regra (ex.: o progresso só avança se a fase anterior foi concluída). |
 | Responsabilidade única | Controller só trata HTTP; service só regra; repository só dados; mapper só conversão. |
 | Inversão de dependência | Injeção por construtor; services dependem de interfaces. |

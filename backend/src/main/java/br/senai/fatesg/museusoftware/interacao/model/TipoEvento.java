@@ -1,0 +1,12 @@
+package br.senai.fatesg.museusoftware.interacao.model;
+
+public enum TipoEvento {
+	SESSAO_INICIADA,
+	PERIODO_ACESSADO,
+	EIXO_ACESSADO,
+	CONTEUDO_ABERTO,
+	FASE_INICIADA,
+	FASE_CONCLUIDA,
+	PORTAL_ATRAVESSADO,
+	DESAFIO_RESPONDIDO
+}
