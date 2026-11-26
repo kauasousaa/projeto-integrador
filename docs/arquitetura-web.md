@@ -14,9 +14,9 @@ projeto-integrador/
 └── docs/      Documentação técnica (arquitetura, decisões, fontes)
 ```
 
-O jogo, **"Jornada do Código: a evolução do software"**, é organizado pelos **5 períodos históricos** do edital (cada período é uma "era" do jogo, liberada de forma linear). Cada era contém **marcos históricos** (mundo e Brasil) e **desafios**. Toda ação do jogador é registrada como **interação** para Analytics.
+Conceito atual (26/11/2026, ainda sem implementação): jogo **8-bit estilo plataforma (tipo Mario)**. O jogador atravessa fases e a história da evolução do software avança junto. **Portais** mudam de fase/era. As 5 eras do edital continuam sendo a espinha dorsal, em ordem. Cada ação relevante do jogador será registrada como **interação** para Analytics.
 
-> **Versão 1:** apenas desafios do tipo **Quiz**. A hierarquia `Desafio` (abstrata) já nasce preparada para novos tipos (Linha do Tempo, Ache o Bug, Associação) sem alterar o código existente (princípio aberto/fechado).
+O conceito anterior (aventura em telas, "Jornada do Código", só quiz) foi substituído e não deve ser implementado. O motor 2D e o encaixe do conteúdo educativo dentro das fases ainda não foram definidos.
 
 ---
 
