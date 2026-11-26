@@ -1,0 +1,198 @@
+.tela-tiro {
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(#3a2414 0 14%, #5c3a22 14% 62%, #6e4424 62% 78%, #3a2414 78% 100%);
+  color: #2a160c;
+  font-family: 'Press Start 2P', ui-monospace, monospace;
+}
+
+.tela-tiro .pergunta {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  text-align: center;
+}
+
+.tela-tiro .pergunta span {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+}
+
+.tela-tiro .pergunta {
+  top: 18px;
+  width: min(760px, calc(100% - 32px));
+  padding: 12px 14px;
+  background: #e6c36a;
+  border: 4px solid #2a160c;
+  box-shadow: 4px 4px 0 #2a160c;
+  color: #2a160c;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.tela-tiro .parede {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  top: 26%;
+  bottom: 34%;
+  background: #4a3018;
+  border: 8px solid #2a160c;
+  box-shadow: inset 0 0 0 8px #6b4423;
+}
+
+.tela-tiro .alvos {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 16px;
+  padding: 12px;
+}
+
+.tela-tiro .alvo {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #2a160c;
+  font: inherit;
+  cursor: crosshair;
+}
+
+.tela-tiro .alvo:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.tela-tiro .anel {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.tela-tiro .externo {
+  width: 132px;
+  height: 132px;
+  background: #f4f1de;
+  border: 8px solid #d7263d;
+}
+
+.tela-tiro .meio {
+  width: 84px;
+  height: 84px;
+  background: #d7263d;
+  border: 8px solid #f4f1de;
+}
+
+.tela-tiro .centro {
+  width: 28px;
+  height: 28px;
+  background: #f4f1de;
+  border: 4px solid #2a160c;
+}
+
+.tela-tiro .alvo.atingido .centro {
+  background: #140e18;
+  box-shadow: 0 0 0 4px #ffe14a;
+}
+
+.tela-tiro .nome {
+  padding: 8px 10px;
+  background: #e6c36a;
+  border: 4px solid #2a160c;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.tela-tiro .primeiro-plano {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  display: grid;
+  place-items: end center;
+  pointer-events: none;
+  background: linear-gradient(transparent, #2a160c 70%);
+}
+
+.tela-tiro .arma {
+  width: 312px;
+  height: 264px;
+  image-rendering: pixelated;
+}
+
+.tela-tiro .resultado {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 28px;
+  width: min(520px, calc(100% - 32px));
+  transform: translateX(-50%);
+  padding: 14px;
+  background: #2a160c;
+  border: 4px solid #e6c36a;
+  box-shadow: 6px 6px 0 #120c22;
+  color: #f3e2b3;
+}
+
+.tela-tiro .resultado h1 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e6c36a;
+}
+
+.tela-tiro .resultado.acerto h1 {
+  color: #7dffb3;
+}
+
+.tela-tiro .resultado.erro h1 {
+  color: #ffb4b4;
+}
+
+.tela-tiro .resultado p {
+  margin: 0 0 12px;
+  color: #f3e2b3;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.tela-tiro .resultado button {
+  margin: 0;
+  padding: 12px 14px;
+  border: 4px solid #2a160c;
+  background: #e6c36a;
+  color: #2a160c;
+  font: inherit;
+  font-size: 10px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #120c22;
+}
+
+@media (max-width: 800px) {
+  .tela-tiro .externo {
+    width: 92px;
+    height: 92px;
+  }
+
+  .tela-tiro .meio {
+    width: 58px;
+    height: 58px;
+  }
+
+  .tela-tiro .parede {
+    left: 4%;
+    right: 4%;
+  }
+}

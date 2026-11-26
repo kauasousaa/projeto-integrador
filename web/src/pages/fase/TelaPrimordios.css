@@ -1,0 +1,119 @@
+.tela-fase {
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  background: #120c22;
+  color: #f3e2b3;
+  font-family: 'Press Start 2P', ui-monospace, monospace;
+}
+
+.tela-fase .palco {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: #120c22;
+  border: 0;
+}
+
+.tela-fase canvas {
+  image-rendering: pixelated;
+  background: #120c22;
+}
+
+.tela-fase .guia,
+.tela-fase .controles,
+.tela-fase .fim {
+  position: absolute;
+  z-index: 1;
+}
+
+.tela-fase .guia {
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.tela-fase .identidade {
+  padding: 10px 12px;
+  background: #e6c36a;
+  border: 4px solid #2a160c;
+  box-shadow: 4px 4px 0 #2a160c;
+}
+
+.tela-fase .selo,
+.tela-fase .controles,
+.tela-fase .fim p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.tela-fase .selo,
+.tela-fase h1 {
+  color: #2a160c;
+}
+
+.tela-fase h1,
+.tela-fase h2 {
+  margin: 2px 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.tela-fase button {
+  margin: 0;
+  padding: 12px 14px;
+  border: 4px solid #e6c36a;
+  background: #2a160c;
+  color: #f3e2b3;
+  font: inherit;
+  font-size: 10px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #120c22;
+  pointer-events: auto;
+}
+
+.tela-fase .controles {
+  left: 12px;
+  bottom: 12px;
+  max-width: min(640px, calc(100% - 24px));
+  padding: 10px 12px;
+  background: #2a160c;
+  color: #f3e2b3;
+  border: 4px solid #e6c36a;
+  pointer-events: none;
+}
+
+.tela-fase .fim {
+  left: 50%;
+  bottom: 88px;
+  width: min(460px, calc(100% - 24px));
+  transform: translateX(-50%);
+  padding: 14px;
+  background: #2a160c;
+  color: #f3e2b3;
+  border: 4px solid #e6c36a;
+  box-shadow: 6px 6px 0 #120c22;
+}
+
+.tela-fase .fim h2 {
+  color: #e6c36a;
+}
+
+.tela-fase .fim p {
+  margin: 8px 0 12px;
+}
+
+.tela-fase .fim button {
+  background: #e6c36a;
+  color: #2a160c;
+  border-color: #2a160c;
+}

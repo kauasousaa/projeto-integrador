@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import { TelaLogin } from './pages/login/TelaLogin'
 import { TelaLobby } from './pages/lobby/TelaLobby'
 import { TelaPersonagem } from './pages/personagem/TelaPersonagem'
+import { TelaPrimordios } from './pages/fase/TelaPrimordios'
+import { TelaTiro } from './pages/tiro/TelaTiro'
 import { buscarAparencia } from './services/api/aparencia'
 import { CHAVE_SESSAO } from './constants/sessao'
 import type { Aparencia } from './types/aparencia'
 import type { SessaoCriada } from './types/sessao'
 
-type Etapa = 'carregando' | 'personagem' | 'lobby'
+type Etapa = 'carregando' | 'personagem' | 'lobby' | 'primordios' | 'tiro'
 
 export default function App() {
   const [sessaoPronta, setSessaoPronta] = useState(false)
@@ -40,7 +42,13 @@ export default function App() {
           return
         }
         setAparencia((atual) => (atual?.salva ? atual : salva))
-        setEtapa((atual) => (atual === 'lobby' ? atual : salva.salva ? 'lobby' : 'personagem'))
+        setEtapa((atual) =>
+          atual === 'lobby' || atual === 'primordios' || atual === 'tiro'
+            ? atual
+            : salva.salva
+              ? 'lobby'
+              : 'personagem',
+        )
       })
       .catch(() => {
         if (ativo) {
@@ -73,6 +81,20 @@ export default function App() {
     return <TelaLogin onEntrar={entrar} />
   }
 
+  if (etapa === 'tiro' && aparencia) {
+    return <TelaTiro aparencia={aparencia} onVoltar={() => setEtapa('lobby')} />
+  }
+
+  if (etapa === 'primordios' && aparencia) {
+    return (
+      <TelaPrimordios
+        aparencia={aparencia}
+        onVoltar={() => setEtapa('lobby')}
+        onConcluir={() => setEtapa('tiro')}
+      />
+    )
+  }
+
   if (etapa === 'lobby' && aparencia) {
     return (
       <TelaLobby
@@ -80,6 +102,7 @@ export default function App() {
         aparencia={aparencia}
         onAjustarVisual={() => setEtapa('personagem')}
         onTrocarNome={trocarNome}
+        onEntrarPrimordios={() => setEtapa('primordios')}
       />
     )
   }

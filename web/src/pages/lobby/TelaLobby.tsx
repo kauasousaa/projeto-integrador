@@ -19,6 +19,7 @@ type Propriedades = {
   aparencia: Aparencia
   onAjustarVisual: () => void
   onTrocarNome: () => void
+  onEntrarPrimordios: () => void
 }
 
 const VELOCIDADE = 100
@@ -36,9 +37,17 @@ function teclaDeAndar(tecla: string) {
   )
 }
 
-export function TelaLobby({ sessao, aparencia, onAjustarVisual, onTrocarNome }: Propriedades) {
+export function TelaLobby({
+  sessao,
+  aparencia,
+  onAjustarVisual,
+  onTrocarNome,
+  onEntrarPrimordios,
+}: Propriedades) {
   const palco = useRef<HTMLDivElement>(null)
   const tela = useRef<HTMLCanvasElement>(null)
+  const entrarPrimordios = useRef(onEntrarPrimordios)
+  entrarPrimordios.current = onEntrarPrimordios
   const [alaId, setAlaId] = useState<CodigoFase | null>(null)
   const [mostrarDica, setMostrarDica] = useState(true)
   const ala = FASES_LOBBY.find((fase) => fase.id === alaId) ?? null
@@ -99,6 +108,11 @@ export function TelaLobby({ sessao, aparencia, onAjustarVisual, onTrocarNome }: 
 
     const aoPressionar = (evento: KeyboardEvent) => {
       const tecla = evento.key.toLowerCase()
+      if (tecla === 'e' && alaPerto(x, y) === 'PRIMORDIOS') {
+        evento.preventDefault()
+        entrarPrimordios.current()
+        return
+      }
       if (!teclaDeAndar(tecla)) {
         return
       }
@@ -208,7 +222,11 @@ export function TelaLobby({ sessao, aparencia, onAjustarVisual, onTrocarNome }: 
               <p className="numero">fase 0{ala.numero} · {ala.quando}</p>
               <h2>{ala.nome}</h2>
               <p>{ala.tema}</p>
-              <p className="aviso">A visita a esta época abre na próxima etapa. A fase ainda não está montada.</p>
+              <p className="aviso">
+                {ala.id === 'PRIMORDIOS'
+                  ? 'Pressione E para entrar nesta época.'
+                  : 'A visita a esta época abre na próxima etapa. A fase ainda não está montada.'}
+              </p>
             </>
           ) : (
             <p>Ande pelo corredor. O começo fica na entrada. Quanto mais você avança, mais o museu olha para o futuro.</p>
