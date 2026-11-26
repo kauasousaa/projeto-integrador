@@ -18,6 +18,7 @@ import './TelaPersonagem.css'
 type Propriedades = {
   sessao: SessaoCriada
   onTrocarNome: () => void
+  onEntrar: (aparencia: Aparencia) => void
 }
 
 function proximoEstilo(atual: EstiloCabelo, direcao: 1 | -1) {
@@ -26,7 +27,7 @@ function proximoEstilo(atual: EstiloCabelo, direcao: 1 | -1) {
   return ESTILOS_CABELO[proximo].id
 }
 
-export function TelaPersonagem({ sessao, onTrocarNome }: Propriedades) {
+export function TelaPersonagem({ sessao, onTrocarNome, onEntrar }: Propriedades) {
   const [aparencia, setAparencia] = useState<Aparencia>(APARENCIA_INICIAL)
   const [carregando, setCarregando] = useState(true)
   const [salvando, setSalvando] = useState(false)
@@ -67,8 +68,7 @@ export function TelaPersonagem({ sessao, onTrocarNome }: Propriedades) {
     setMensagem(null)
     try {
       const salva = await salvarAparencia(sessao.codigo, aparencia)
-      setAparencia(salva)
-      setMensagem('Personagem salvo. A primeira fase abre em seguida.')
+      onEntrar(salva)
     } catch (falha) {
       setErro(falha instanceof Error ? falha.message : 'Não foi possível salvar o personagem.')
     } finally {
@@ -115,7 +115,7 @@ export function TelaPersonagem({ sessao, onTrocarNome }: Propriedades) {
 
         <div className="acoes">
           <button type="button" onClick={confirmar} disabled={carregando || salvando}>
-            {salvando ? 'Salvando...' : 'Confirmar personagem'}
+            {salvando ? 'Entrando...' : 'Entrar no museu'}
           </button>
           <button type="button" className="secundario" onClick={onTrocarNome}>
             Trocar nome

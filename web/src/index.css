@@ -9,6 +9,14 @@ body,
   min-height: 100%;
 }
 
-body {
+.abrindo {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
   background: #1b1464;
+  color: #ffe14a;
+  font-family: 'Press Start 2P', ui-monospace, monospace;
+  font-size: 12px;
+  text-align: center;
 }

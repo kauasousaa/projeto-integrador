@@ -51,7 +51,7 @@
   line-height: 1.8;
 }
 
-.palco {
+.tela-personagem .palco {
   display: grid;
   place-items: center;
   margin-top: 18px;
