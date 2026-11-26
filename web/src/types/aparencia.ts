@@ -1,5 +1,5 @@
 export type TomPele = 'CLARO' | 'PESSEGO' | 'MORENO' | 'BRONZE' | 'ESCURO'
-export type EstiloCabelo = 'CURTO' | 'FRANJA' | 'LONGO' | 'COQUE' | 'CARECA'
+export type EstiloCabelo = 'CURTO' | 'FRANJA' | 'CACHEADO' | 'AFRO' | 'LONGO' | 'TRANCAS' | 'COQUE' | 'RABO' | 'CARECA'
 export type CorCabelo = 'PRETO' | 'CASTANHO' | 'LOIRO' | 'RUIVO' | 'ROSA'
 export type CorOlhos = 'CASTANHO' | 'VERDE' | 'AZUL' | 'MEL'
 export type CorCamisa = 'VERMELHO' | 'AZUL' | 'VERDE' | 'ROXO' | 'AMARELO'
@@ -36,8 +36,12 @@ export const TOM_PELE: { id: TomPele; nome: string; cor: string }[] = [
 export const ESTILOS_CABELO: { id: EstiloCabelo; nome: string }[] = [
   { id: 'CURTO', nome: 'Curto' },
   { id: 'FRANJA', nome: 'Franja' },
+  { id: 'CACHEADO', nome: 'Cacheado' },
+  { id: 'AFRO', nome: 'Afro' },
   { id: 'LONGO', nome: 'Longo' },
+  { id: 'TRANCAS', nome: 'Tranças' },
   { id: 'COQUE', nome: 'Coque' },
+  { id: 'RABO', nome: 'Rabo de cavalo' },
   { id: 'CARECA', nome: 'Careca' },
 ]
 

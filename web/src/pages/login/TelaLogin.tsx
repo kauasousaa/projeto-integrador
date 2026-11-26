@@ -1,5 +1,9 @@
-import { useState, type FormEvent } from 'react'
+import { useMemo, useState, type FormEvent } from 'react'
+import { SpritePersonagem } from '../../features/jogo/components/SpritePersonagem'
+import { PixelArt } from '../../features/jogo/pixel/PixelArt'
+import { portalPixel } from '../../features/jogo/pixel/sprites'
 import { criarSessao } from '../../services/api/sessao'
+import { APARENCIA_INICIAL } from '../../types/aparencia'
 import type { SessaoCriada } from '../../types/sessao'
 import './TelaLogin.css'
 
@@ -11,6 +15,7 @@ export function TelaLogin({ onEntrar }: Propriedades) {
   const [nome, setNome] = useState('')
   const [mensagem, setMensagem] = useState<string | null>(null)
   const [carregando, setCarregando] = useState(false)
+  const portal = useMemo(() => portalPixel(), [])
 
   async function entrar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault()
@@ -73,8 +78,12 @@ export function TelaLogin({ onEntrar }: Propriedades) {
       </section>
 
       <div className="chao" aria-hidden="true">
-        <div className="heroi" />
-        <div className="portal" />
+        <div className="heroi">
+          <SpritePersonagem aparencia={APARENCIA_INICIAL} escala={4} />
+        </div>
+        <div className="portal">
+          <PixelArt grade={portal} escala={4} />
+        </div>
       </div>
     </main>
   )

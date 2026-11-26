@@ -2,7 +2,7 @@
   min-height: 100svh;
   display: grid;
   place-items: center;
-  padding: 24px 16px 120px;
+  padding: 24px 16px 160px;
   position: relative;
   overflow: hidden;
   background: #1b1464;
@@ -118,38 +118,25 @@ button:disabled {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 88px;
+  height: 96px;
   background:
-    linear-gradient(#3aa84a, #3aa84a 18px, #6b3f22 18px);
+    repeating-linear-gradient(90deg, #2f8f3a 0 8px, #46c255 8px 16px) top / 100% 16px no-repeat,
+    repeating-linear-gradient(90deg, #6b3f22 0 8px, #8a5330 8px 16px) bottom / 100% 80px no-repeat;
   border-top: 4px solid #17381c;
+  image-rendering: pixelated;
 }
 
 .heroi,
 .portal {
   position: absolute;
-  bottom: 22px;
-  transform: scale(2.4);
-  transform-origin: bottom center;
+  bottom: 80px;
   image-rendering: pixelated;
 }
 
 .heroi {
-  left: max(24px, calc(50% - 280px));
-  width: 28px;
-  height: 44px;
-  background:
-    linear-gradient(#f2c14e, #f2c14e) 6px 0 / 16px 10px no-repeat,
-    linear-gradient(#e23d4a, #e23d4a) 4px 12px / 20px 16px no-repeat,
-    linear-gradient(#2b2d42, #2b2d42) 6px 30px / 6px 14px no-repeat,
-    linear-gradient(#2b2d42, #2b2d42) 16px 30px / 6px 14px no-repeat;
+  left: max(16px, calc(50% - 340px));
 }
 
 .portal {
-  right: max(24px, calc(50% - 280px));
-  width: 36px;
-  height: 52px;
-  border: 4px solid #9d4edd;
-  border-bottom: 0;
-  background: repeating-linear-gradient(90deg, #5a189a, #5a189a 4px, #c77dff 4px, #c77dff 8px);
-  box-shadow: inset 0 0 0 4px #240046;
+  right: max(16px, calc(50% - 340px));
 }
